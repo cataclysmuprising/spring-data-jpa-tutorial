@@ -1,0 +1,18 @@
+spring:
+  main:
+    banner-mode: 'off' #disable banner
+  mvc:
+    throw-exception-if-no-handler-found: true #disable spring's default exception handling
+  resources:
+    add-mappings: false # disable the static resource handling
+  profiles:
+    active: dev # Set the active profile here
+  jpa:
+    properties:
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true #Enable autoregistration of Jadira Usertypes
+# Define Logger config file directory
+logging:
+  config: classpath:logger/log4j2-${spring.profiles.active}.yml
+
