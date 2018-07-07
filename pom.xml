@@ -40,11 +40,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- Querydsl with Spring Data JPA -->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>4.2.1</version>
+        </dependency>
         <!-- DataBase Connector -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <!-- Testing -->
         <dependency>
@@ -108,8 +113,8 @@
         <!-- Jadira Usertype Core (for Joda Time, Joda Money, Libphonenum and JDK Types with Hibernate) -->
         <dependency>
             <groupId>org.jadira.usertype</groupId>
-            <artifactId>usertype.core-hibernate36</artifactId>
-            <version>3.2.0.GA</version>
+            <artifactId>usertype.core</artifactId>
+            <version>7.0.0.CR1</version>
         </dependency>
         <!-- Lombok -->
         <dependency>
@@ -162,6 +167,30 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <!-- The APT – Annotation processing tool – plugin for QueryDSL -->
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.1.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>4.2.1</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/apt</outputDirectory>
+                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

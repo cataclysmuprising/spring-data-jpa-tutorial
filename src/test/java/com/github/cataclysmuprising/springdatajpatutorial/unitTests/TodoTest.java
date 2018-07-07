@@ -2,43 +2,51 @@ package com.github.cataclysmuprising.springdatajpatutorial.unitTests;
 
 import com.github.cataclysmuprising.springdatajpatutorial.entity.Todo;
 import com.github.cataclysmuprising.springdatajpatutorial.repository.TodoRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
+import java.util.stream.Stream;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-public class TodoTest {
+public class TodoTest extends BaseUnitTest {
 
-	@Autowired
-	private TestEntityManager entityManager;
+	private static Logger testLogger = LogManager.getLogger("testLogs." + TodoTest.class);
 
 	@Autowired
 	private TodoRepository todoRepository;
 
+	@Before
+	public void setup() {
+		Todo todo1 = new Todo();
+		todo1.setTitle("sample1");
+		todo1.setDescription("Sample Description 1");
+		todo1.setCreationTime(LocalDateTime.now());
+		todo1.setModificationTime(LocalDateTime.now());
+		todo1.setVersion(1l);
+		todoRepository.save(todo1);
+
+		Todo todo2 = new Todo();
+		todo2.setTitle("sample2");
+		todo2.setDescription("Sample Description 2");
+		todo2.setCreationTime(LocalDateTime.now());
+		todo2.setModificationTime(LocalDateTime.now());
+		todo2.setVersion(1l);
+		todoRepository.save(todo2);
+	}
+
 	@Test
-	public void whenFindByTitle_thenReturnTodo() {
-		// given
-		Todo todo = new Todo();
-		todo.setTitle("sample");
-		todo.setDescription("Sample Description");
-		todo.setCreationTime(LocalDateTime.now());
-		todo.setModificationTime(LocalDateTime.now());
-		todo.setVersion(1l);
+	public void findByTitle() {
+		Todo found = todoRepository.findByTitle("sample1");
+		Assert.assertEquals("sample1", found.getTitle());
+	}
 
-		entityManager.persist(todo);
-		entityManager.flush();
-
-		// when
-		Todo found = todoRepository.findByTitle("sample");
-
-		// then
-		Assert.assertEquals(found.getTitle(), todo.getTitle());
+	@Test
+	public void findByTitleContains() {
+		Stream<Todo> results = todoRepository.findByTitleContains("sample");
+		results.forEach(result -> testLogger.info(result));
 	}
 }

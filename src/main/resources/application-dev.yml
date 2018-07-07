@@ -3,29 +3,36 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        use_sql: true
-        show_sql: true
-        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        show_sql: true # for dev purpose
+        format_sql: true # for dev purpose
         hbm2ddl:
           auto: create-drop
         ejb:
           naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
-        id:
-          new_generator_mappings: false
+        temp:
+          use_jdbc_metadata_defaults: false #Disabling contextual LOB creation error
         bytecode:
           use_reflection_optimizer: false
 # Primary DataSource config
 datasource:
   primary:
-    jdbc-url: jdbc:h2:mem:datajpa
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-    hikari:
-      poolName: PrimaryDataSourceJPAHikariCP
-      connection-timeout: 30000
-      minimumIdle: 5
-      maximum-pool-size: 5
-      idleTimeout: 30000
-      maxLifetime: 2000000
+    type: com.zaxxer.hikari.HikariDataSource
+    jdbc-url: jdbc:postgresql://localhost:5432/testdb?currentSchema=testingjpa
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    destroy-method: shutdown
+    connection-test-query: SELECT 1
+    poolName: PrimaryDataSourceJPAHikariCP
+    connection-timeout: 30000
+    minimumIdle: 5
+    maximum-pool-size: 10
+    idleTimeout: 30000
+    maxLifetime: 2000000
+    useServerPrepStmts: true
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useUnicode: true
+    characterEncoding: utf-8
