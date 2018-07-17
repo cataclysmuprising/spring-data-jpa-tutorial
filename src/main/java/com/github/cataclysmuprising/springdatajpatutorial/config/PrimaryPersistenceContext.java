@@ -1,9 +1,11 @@
 package com.github.cataclysmuprising.springdatajpatutorial.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import static com.github.cataclysmuprising.springdatajpatutorial.config.PrimaryPersistenceContext.*;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -16,20 +18,14 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
-import static com.github.cataclysmuprising.springdatajpatutorial.config.PrimaryPersistenceContext.ENTITY_MANAGER_FACTORY;
-import static com.github.cataclysmuprising.springdatajpatutorial.config.PrimaryPersistenceContext.TRANSACTION_MANAGER;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement
 @EnableConfigurationProperties
-@EnableJpaRepositories(
-		entityManagerFactoryRef = ENTITY_MANAGER_FACTORY,
-		transactionManagerRef = TRANSACTION_MANAGER,
-		basePackages = {"com.github.cataclysmuprising.springdatajpatutorial.repository"})
-@EntityScan(basePackages = "com.github.cataclysmuprising.springdatajpatutorial.entity")
+@EnableJpaRepositories(entityManagerFactoryRef = ENTITY_MANAGER_FACTORY, transactionManagerRef = TRANSACTION_MANAGER, basePackages = {
+		"com.github.cataclysmuprising.springdatajpatutorial.repository" })
 public class PrimaryPersistenceContext {
 	public static final String DATASOURCE_CONFIG = "primaryDSConfig";
 	public static final String DATASOURCE = "primaryDataSource";
@@ -50,20 +46,13 @@ public class PrimaryPersistenceContext {
 
 	@Primary
 	@Bean(name = ENTITY_MANAGER_FACTORY)
-	public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(
-			EntityManagerFactoryBuilder builder,
-			@Qualifier(DATASOURCE) DataSource primaryDataSource) {
-		return builder
-				.dataSource(primaryDataSource)
-				.packages("com.github.cataclysmuprising.springdatajpatutorial.entity")
-				.persistenceUnit("primaryPSTUnit")
-				.build();
+	public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier(DATASOURCE) DataSource primaryDataSource) {
+		return builder.dataSource(primaryDataSource).packages("com.github.cataclysmuprising.springdatajpatutorial.model").persistenceUnit("primaryPSTUnit").build();
 	}
 
 	@Primary
 	@Bean(name = TRANSACTION_MANAGER)
-	public PlatformTransactionManager primaryTransactionManager(
-			@Qualifier(ENTITY_MANAGER_FACTORY) EntityManagerFactory primaryEntityManagerFactory) {
+	public PlatformTransactionManager primaryTransactionManager(@Qualifier(ENTITY_MANAGER_FACTORY) EntityManagerFactory primaryEntityManagerFactory) {
 		return new JpaTransactionManager(primaryEntityManagerFactory);
 	}
 }
