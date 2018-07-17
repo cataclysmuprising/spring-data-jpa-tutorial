@@ -1,24 +1,16 @@
 package com.github.cataclysmuprising.springdatajpatutorial.model;
 
-import static com.github.cataclysmuprising.springdatajpatutorial.util.common.PreCondition.*;
-
-import java.time.ZonedDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+
+import static com.github.cataclysmuprising.springdatajpatutorial.util.common.PreCondition.*;
 
 /**
  * This entity class contains the information of a single todo entry and the methods that are used to create new todo entries and to modify the information of an existing todo entry.
@@ -43,7 +35,7 @@ public final class Todo {
 
 	@Column(name = "creation_time", nullable = false)
 	@CreatedDate
-	private ZonedDateTime creationTime;
+	private DateTime creationTime;
 
 	@Column(name = "description", length = MAX_LENGTH_DESCRIPTION)
 	private String description;
@@ -54,7 +46,7 @@ public final class Todo {
 
 	@Column(name = "modification_time")
 	@LastModifiedDate
-	private ZonedDateTime modificationTime;
+	private DateTime modificationTime;
 
 	@Column(name = "title", nullable = false, length = MAX_LENGTH_TITLE)
 	private String title;
@@ -71,6 +63,34 @@ public final class Todo {
 	private Todo(Builder builder) {
 		this.title = builder.title;
 		this.description = builder.description;
+	}
+
+	/**
+	 * This entity is so simple that you don't really need to use the builder pattern (use a constructor instead). I use the builder pattern here because it makes the code a bit more easier to read.
+	 */
+	public static class Builder {
+		private String description;
+		private String title;
+
+		private Builder() {
+		}
+
+		public Builder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public Builder title(String title) {
+			this.title = title;
+			return this;
+		}
+
+		public Todo build() {
+			Todo build = new Todo(this);
+			build.requireValidTitleAndDescription(build.getTitle(), build.getDescription());
+
+			return build;
+		}
 	}
 
 	public static Builder getBuilder() {
@@ -93,11 +113,11 @@ public final class Todo {
 		this.createdByUser = createdByUser;
 	}
 
-	public ZonedDateTime getCreationTime() {
+	public DateTime getCreationTime() {
 		return creationTime;
 	}
 
-	public void setCreationTime(ZonedDateTime creationTime) {
+	public void setCreationTime(DateTime creationTime) {
 		this.creationTime = creationTime;
 	}
 
@@ -117,11 +137,11 @@ public final class Todo {
 		this.modifiedByUser = modifiedByUser;
 	}
 
-	public ZonedDateTime getModificationTime() {
+	public DateTime getModificationTime() {
 		return modificationTime;
 	}
 
-	public void setModificationTime(ZonedDateTime modificationTime) {
+	public void setModificationTime(DateTime modificationTime) {
 		this.modificationTime = modificationTime;
 	}
 
@@ -161,35 +181,5 @@ public final class Todo {
 		return new ToStringBuilder(this).append("createdByUser", this.createdByUser).append("creationTime", this.creationTime).append("description", this.description)
 				.append("id", this.id).append("modifiedByUser", this.modifiedByUser).append("modificationTime", this.modificationTime).append("title", this.title)
 				.append("version", this.version).toString();
-	}
-
-	/**
-	 * This entity is so simple that you don't really need to use the builder pattern (use a constructor instead). I use the builder pattern here because it makes the code a bit more easier to read.
-	 */
-	public static class Builder {
-		private String description;
-		private String title;
-
-		private Builder() {
-		}
-
-		public Builder description(String description) {
-			this.description = description;
-			return this;
-		}
-
-		public Builder title(String title) {
-			this.title = title;
-			return this;
-		}
-
-		public Todo build() {
-			Todo build = new Todo(this);
-			build.createdByUser = "Administrator";
-			build.modifiedByUser = "Administrator";
-			build.requireValidTitleAndDescription(build.getTitle(), build.getDescription());
-
-			return build;
-		}
 	}
 }

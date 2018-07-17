@@ -5,7 +5,7 @@ Configutation:
   Properties:
     Property:
       - name: default-msg-pattern
-        value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %c{1}:%L %m%n"
+        value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %c{10}:%L %m%n"
 
 ##### Define logging appenders #####
   Appenders:
@@ -14,37 +14,25 @@ Configutation:
       - name: root_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}:%L %m%n"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}:%L %m%n"
           disableAnsi: false
 
       - name: console_test_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=magenta bold, DEBUG=magenta, TRACE=magenta}"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=magenta bold, DEBUG=magenta, TRACE=magenta}"
           disableAnsi: false
 
       - name: console_error_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=red bold, INFO=red bold, DEBUG=red, TRACE=red}"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=red bold, INFO=red bold, DEBUG=red, TRACE=red}"
           disableAnsi: false
 
       - name: console_service_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=blue bold, DEBUG=blue, TRACE=blue}"
-          disableAnsi: false
-
-      - name: console_dao_logger
-        target: SYSTEM_OUT
-        PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=yellow bold, DEBUG=yellow, TRACE=yellow}"
-          disableAnsi: false
-
-      - name: console_sql_logger
-        target: SYSTEM_OUT
-        PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green bold, DEBUG=green, TRACE=green}"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=blue bold, DEBUG=blue, TRACE=blue}"
           disableAnsi: false
 
 ##### Define loggers #####
@@ -74,44 +62,56 @@ Configutation:
         AppenderRef:
           - ref: console_service_logger
 
-      - name: daoLogs  # service Logger
-        additivity: false
-        level: DEBUG
-        AppenderRef:
-            - ref: console_dao_logger
-
-      - name: com.github.cataclysmuprising.springdatajpatutorial # sql Logger
-        additivity: false
-        level: DEBUG
-        AppenderRef:
-          - ref: console_sql_logger
-
         ### Spring framework ###
       - name : org.springframework
-        level: INFO
+        level: DEBUG
+      - name : org.springframework.test.context.support
+        level: WARN
+      - name : org.springframework.beans.factory.support
+        level: WARN
+      - name : org.springframework.context.annotation
+        level: WARN
+      - name : org.springframework.core.env
+        level: WARN
+      - name : org.springframework.core.io.support
+        level: WARN
+      - name : org.springframework.aop.framework
+        level: WARN
+      - name : org.springframework.beans.factory.annotation
+        level: WARN
+      - name : org.springframework.test.context.cache
+        level: WARN
       - name : org.springframework.boot.actuate
-        level: ERROR
+        level: WARN
       - name : org.springframework.boot.autoconfigure
-        level: ERROR
+        level: WARN
+      - name : org.springframework.boot.context
+        level: WARN
       - name : org.springframework.jdbc.datasource.DataSourceUtils
         level: WARN
-        ### Apache loggings ###
-      - name : org.apache.http # DEBUG to see full REST service requests info
-        level: INFO
+      - name : org.springframework.transaction.annotation
+        level: WARN
       - name : org.apache.commons
         level: ERROR
-        ### Others ###
-      - name : com.zaxxer # change below to DEBUG if you want to see transaction processes and connection pool properties
-        level: WARN
-      - name : org.apache.http.impl.conn.PoolingHttpClientConnectionManager
-        level: WARN
-      - name : org.hibernate.validator.internal
+      - name : org.springframework.beans.BeanUtils
         level: ERROR
-      - name : com.sun.mail
-        level: INFO
-      - name : org.springframework.jmx.export.annotation
+      - name : org.springframework.core.LocalVariableTableParameterNameDiscoverer
+        level: ERROR
+      - name : org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler
+        level: ERROR
+      - name : org.springframework.data.repository.config # Spring data configurations
         level: WARN
-      - name : SMTP
+      - name : org.springframework.orm.jpa.EntityManagerFactoryUtils # JPA EntityManager Status
+        level: WARN
+        ### Hibernate ###
+      - name : org.hibernate # hibernate settings
         level: INFO
       - name : org.hibernate.type.BasicTypeRegistry
+        level: ERROR
+      - name : org.hibernate.SQL # logs the SQL statements
+        level: DEBUG
+      - name : org.hibernate.type # Logs the JDBC parameters passed to a query
+        level: TRACE
+        ### Others ###
+      - name : com.zaxxer # change below to DEBUG if you want to see connection pool properties
         level: WARN

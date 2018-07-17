@@ -1,10 +1,7 @@
 package com.github.cataclysmuprising.springdatajpatutorial.config;
 
-import static com.github.cataclysmuprising.springdatajpatutorial.config.PrimaryPersistenceContext.*;
-
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,20 +9,24 @@ import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import static com.github.cataclysmuprising.springdatajpatutorial.config.PrimaryPersistenceContext.ENTITY_MANAGER_FACTORY;
+import static com.github.cataclysmuprising.springdatajpatutorial.config.PrimaryPersistenceContext.TRANSACTION_MANAGER;
 
 @Configuration
 @EnableTransactionManagement
 @EnableConfigurationProperties
 @EnableJpaRepositories(entityManagerFactoryRef = ENTITY_MANAGER_FACTORY, transactionManagerRef = TRANSACTION_MANAGER, basePackages = {
-		"com.github.cataclysmuprising.springdatajpatutorial.repository" })
+		"com.github.cataclysmuprising.springdatajpatutorial.repository"})
 public class PrimaryPersistenceContext {
 	public static final String DATASOURCE_CONFIG = "primaryDSConfig";
 	public static final String DATASOURCE = "primaryDataSource";

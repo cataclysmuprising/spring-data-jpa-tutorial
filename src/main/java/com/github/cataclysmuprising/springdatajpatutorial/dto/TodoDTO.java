@@ -1,8 +1,7 @@
 package com.github.cataclysmuprising.springdatajpatutorial.dto;
 
-import java.time.ZonedDateTime;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
 
 /**
  * @author Petri Kainulainen
@@ -11,7 +10,7 @@ public final class TodoDTO {
 
 	private String createdByUser;
 
-	private ZonedDateTime creationTime;
+	private DateTime creationTime;
 
 	private String description;
 
@@ -19,7 +18,7 @@ public final class TodoDTO {
 
 	private String modifiedByUser;
 
-	private ZonedDateTime modificationTime;
+	private DateTime modificationTime;
 
 	private String title;
 
@@ -30,52 +29,52 @@ public final class TodoDTO {
 		return createdByUser;
 	}
 
-	public ZonedDateTime getCreationTime() {
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+
+	public DateTime getCreationTime() {
 		return creationTime;
+	}
+
+	public void setCreationTime(DateTime creationTime) {
+		this.creationTime = creationTime;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public String getModifiedByUser() {
-		return modifiedByUser;
-	}
-
-	public ZonedDateTime getModificationTime() {
-		return modificationTime;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-
-	public void setCreationTime(ZonedDateTime creationTime) {
-		this.creationTime = creationTime;
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	public String getModifiedByUser() {
+		return modifiedByUser;
+	}
+
 	public void setModifiedByUser(String modifiedByUser) {
 		this.modifiedByUser = modifiedByUser;
 	}
 
-	public void setModificationTime(ZonedDateTime modificationTime) {
+	public DateTime getModificationTime() {
+		return modificationTime;
+	}
+
+	public void setModificationTime(DateTime modificationTime) {
 		this.modificationTime = modificationTime;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	public void setTitle(String title) {
