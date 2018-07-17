@@ -41,10 +41,10 @@
             </exclusions>
         </dependency>
         <!-- Querydsl with Spring Data JPA -->
-<!--         <dependency>
+         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-        </dependency> -->
+        </dependency>
         <!-- RSQL parser -->
 		<dependency>
 		    <groupId>cz.jirutka.rsql</groupId>
@@ -119,6 +119,11 @@
             <artifactId>usertype.core</artifactId>
             <version>7.0.0.CR1</version>
         </dependency>
+         <!-- Apache common Lang3 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -176,7 +181,7 @@
                 </configuration>
             </plugin>
             <!-- The APT – Annotation processing tool – plugin for QueryDSL -->
-<!--             <plugin>
+             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
                 <version>1.1.3</version>
@@ -198,7 +203,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin>
         </plugins>
     </build>
 
