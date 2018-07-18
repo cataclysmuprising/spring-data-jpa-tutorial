@@ -1,14 +1,17 @@
 package com.github.cataclysmuprising.springdatajpatutorial.unitTests;
 
-import com.github.cataclysmuprising.springdatajpatutorial.model.Todo;
-import com.github.cataclysmuprising.springdatajpatutorial.repository.TodoRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import com.github.cataclysmuprising.springdatajpatutorial.model.Todo;
+import com.github.cataclysmuprising.springdatajpatutorial.predicate.TodoPredicates;
+import com.github.cataclysmuprising.springdatajpatutorial.repository.TodoRepository;
 
 public class TodoUnitTest extends BaseUnitTest {
 
@@ -30,5 +33,12 @@ public class TodoUnitTest extends BaseUnitTest {
 	public void findAll() {
 		List<Todo> results = repository.findAll();
 		testLogger.info("Total Records ==> " + results.size());
+		repository.count(TodoPredicates.titleOrDescriptionContainsIgnoreCase("Title 1"));
+	}
+
+	@Test
+	public void findByTitleOrDescription() {
+		Optional<Todo> result = repository.findOne(TodoPredicates.titleOrDescriptionContainsIgnoreCase("Title 1"));
+		testLogger.info("Result match with Title 'Title 1' ==> " + result.get());
 	}
 }
