@@ -5,7 +5,7 @@ Configutation:
   Properties:
     Property:
       - name: default-msg-pattern
-        value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %c{10}:%L %m%n"
+        value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %c{1}:%L %m%n"
 
 ##### Define logging appenders #####
   Appenders:
@@ -14,26 +14,32 @@ Configutation:
       - name: root_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}:%L %m%n"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}:%L %m%n"
           disableAnsi: false
 
       - name: console_test_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=magenta bold, DEBUG=magenta, TRACE=magenta}"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=magenta bold, DEBUG=magenta, TRACE=magenta}"
           disableAnsi: false
 
       - name: console_error_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=red bold, INFO=red bold, DEBUG=red, TRACE=red}"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=red bold, INFO=red bold, DEBUG=red, TRACE=red}"
           disableAnsi: false
 
       - name: console_service_logger
         target: SYSTEM_OUT
         PatternLayout:
-          Pattern: "%style{%-5p}{bold,yellow} %style{%c{10}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=blue bold, DEBUG=blue, TRACE=blue}"
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan}%highlight{:%L %m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=blue bold, DEBUG=blue, TRACE=blue}"
           disableAnsi: false
+
+      - name: console_sql_logger
+        target: SYSTEM_OUT
+        PatternLayout:
+          Pattern: "%style{%-5p}{bold,yellow} %style{%c{1}}{bold,cyan} %style{ ==> }{bold,blue} %highlight{%m%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green bold, DEBUG=green, TRACE=green}"
+          disableAnsi: false          
 
 ##### Define loggers #####
   Loggers:
@@ -61,6 +67,12 @@ Configutation:
         level: DEBUG
         AppenderRef:
           - ref: console_service_logger
+          
+      - name: org.hibernate.SQL # sql Logger
+        additivity: false
+        level: DEBUG
+        AppenderRef:
+          - ref: console_sql_logger 
 
         ### Spring framework ###
       - name : org.springframework
@@ -105,11 +117,9 @@ Configutation:
         level: WARN
         ### Hibernate ###
       - name : org.hibernate # hibernate settings
-        level: INFO
+        level: WARN
       - name : org.hibernate.type.BasicTypeRegistry
         level: ERROR
-      - name : org.hibernate.SQL # logs the SQL statements
-        level: DEBUG
       - name : org.hibernate.type # Logs the JDBC parameters passed to a query
         level: TRACE
         ### Others ###

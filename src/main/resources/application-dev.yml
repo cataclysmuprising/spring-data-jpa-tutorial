@@ -4,8 +4,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
-        show_sql: true # for dev purpose
-        format_sql: true # for dev purpose
+        show_sql: false # enable with logger
+        format_sql: false # 'true' for dev purpose
         hbm2ddl:
           auto: create-drop
         ejb:
