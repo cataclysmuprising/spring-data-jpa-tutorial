@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>spring-data-jpa-tutorial</name>
-    <description>JPA Tutorial from petrikainulainen blogpost</description>
+    <description>JPA Tutorial</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -45,12 +45,6 @@
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
         </dependency>
-        <!-- RSQL parser -->
-		<dependency>
-		    <groupId>cz.jirutka.rsql</groupId>
-		    <artifactId>rsql-parser</artifactId>
-		    <version>2.1.0</version>
-		</dependency>
         <!-- DataBase Connector -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -113,6 +107,14 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
+		<dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+        </dependency>        
         <!-- Jadira Usertype Core (for Joda Time, Joda Money, Libphonenum and JDK Types with Hibernate) -->
         <dependency>
             <groupId>org.jadira.usertype</groupId>

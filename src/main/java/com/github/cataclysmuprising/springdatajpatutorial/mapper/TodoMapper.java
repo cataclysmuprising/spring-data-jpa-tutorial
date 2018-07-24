@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import com.github.cataclysmuprising.springdatajpatutorial.domain.Todo;
 import com.github.cataclysmuprising.springdatajpatutorial.dto.TodoDTO;
-import com.github.cataclysmuprising.springdatajpatutorial.model.Todo;
 
 /**
  * This class is a mapper class that is used to transform {@link Todo} objects into {@link TodoDTO} objects.

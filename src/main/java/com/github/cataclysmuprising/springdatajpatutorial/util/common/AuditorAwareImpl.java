@@ -1,13 +1,13 @@
 package com.github.cataclysmuprising.springdatajpatutorial.util.common;
 
-import org.springframework.data.domain.AuditorAware;
-
 import java.util.Optional;
 
-public class AuditorAwareImpl implements AuditorAware<String> {
+import org.springframework.data.domain.AuditorAware;
+
+public class AuditorAwareImpl implements AuditorAware<Long> {
 
 	@Override
-	public Optional<String> getCurrentAuditor() {
-		return Optional.of("Administrator");
+	public Optional<Long> getCurrentAuditor() {
+		return Optional.of(1l);
 	}
 }

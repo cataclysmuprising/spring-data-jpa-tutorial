@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.cataclysmuprising.springdatajpatutorial.domain.Todo;
 import com.github.cataclysmuprising.springdatajpatutorial.dto.TodoDTO;
 import com.github.cataclysmuprising.springdatajpatutorial.exception.TodoNotFoundException;
 import com.github.cataclysmuprising.springdatajpatutorial.mapper.TodoMapper;
-import com.github.cataclysmuprising.springdatajpatutorial.model.Todo;
 import com.github.cataclysmuprising.springdatajpatutorial.repository.TodoRepository;
 import com.github.cataclysmuprising.springdatajpatutorial.service.TodoCrudService;
 

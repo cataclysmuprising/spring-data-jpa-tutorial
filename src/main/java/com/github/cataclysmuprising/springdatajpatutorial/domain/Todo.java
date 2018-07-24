@@ -1,4 +1,15 @@
-package com.github.cataclysmuprising.springdatajpatutorial.model;
+package com.github.cataclysmuprising.springdatajpatutorial.domain;
+
+import static com.github.cataclysmuprising.springdatajpatutorial.util.common.PreCondition.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
@@ -7,10 +18,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
-
-import static com.github.cataclysmuprising.springdatajpatutorial.util.common.PreCondition.*;
 
 /**
  * This entity class contains the information of a single todo entry and the methods that are used to create new todo entries and to modify the information of an existing todo entry.
