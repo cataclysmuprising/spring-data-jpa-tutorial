@@ -1,16 +1,5 @@
 package com.github.cataclysmuprising.springdatajpatutorial.service.impl;
 
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.github.cataclysmuprising.springdatajpatutorial.criteria.StudentCriteria;
 import com.github.cataclysmuprising.springdatajpatutorial.domain.Student;
 import com.github.cataclysmuprising.springdatajpatutorial.dto.StudentDTO;
@@ -18,6 +7,15 @@ import com.github.cataclysmuprising.springdatajpatutorial.repository.StudentRepo
 import com.github.cataclysmuprising.springdatajpatutorial.service.StudentService;
 import com.github.cataclysmuprising.springdatajpatutorial.util.common.ObjectMapperUtil;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -53,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
 		Optional<Student> entry = repository.findOne(criteria.getFilter());
 		serviceLogger.info("Found student entry: {}", entry);
 
-		return ObjectMapperUtil.mapEntityIntoDTO(entry.orElseThrow(() -> new EntityNotFoundException()), StudentDTO.class);
+		return ObjectMapperUtil.mapEntityIntoDTO(entry.orElseThrow(EntityNotFoundException::new), StudentDTO.class);
 	}
 
 	@Transactional(readOnly = true)
@@ -126,9 +124,9 @@ public class StudentServiceImpl implements StudentService {
 		return ObjectMapperUtil.mapEntityIntoDTO(deleted, StudentDTO.class);
 	}
 
-	public Student findEntryById(Long id) {
+	private Student findEntryById(Long id) {
 		Optional<Student> studentResult = repository.findById(id);
-		return studentResult.orElseThrow(() -> new EntityNotFoundException());
+		return studentResult.orElseThrow(EntityNotFoundException::new);
 	}
 
 }

@@ -1,12 +1,8 @@
 package com.github.cataclysmuprising.springdatajpatutorial.domain;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,14 +10,12 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @MappedSuperclass
-@ToString(callSuper = false)
+@ToString
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractEntity {
 	@Id

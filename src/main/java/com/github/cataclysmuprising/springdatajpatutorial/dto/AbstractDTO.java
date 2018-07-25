@@ -1,15 +1,14 @@
 package com.github.cataclysmuprising.springdatajpatutorial.dto;
 
-import org.joda.time.DateTime;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.joda.time.DateTime;
 
 @Getter
 @Setter
-@ToString(callSuper = false)
+@ToString
 public abstract class AbstractDTO {
 	private Long id;
 

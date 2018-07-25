@@ -1,9 +1,9 @@
 package com.github.cataclysmuprising.springdatajpatutorial.criteria;
 
-import static org.springframework.data.domain.Sort.Direction.*;
-
-import java.util.Set;
-
+import com.github.cataclysmuprising.springdatajpatutorial.domain.QAbstractEntity;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.data.domain.PageRequest;
@@ -12,15 +12,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.util.CollectionUtils;
 
-import com.github.cataclysmuprising.springdatajpatutorial.domain.QAbstractEntity;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
+import java.util.Set;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import static org.springframework.data.domain.Sort.Direction.ASC;
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @Data
 @ToString(exclude = { "DEFAULT_MAX_ROWS" })
@@ -45,7 +40,7 @@ public abstract class AbstractCriteria {
 	protected String sortProperty;
 	protected String sortType;
 
-	protected BooleanBuilder getCommonFilter(QAbstractEntity entity) {
+    BooleanBuilder getCommonFilter(QAbstractEntity entity) {
 		BooleanBuilder predicate = new BooleanBuilder();
 		if (id != null) {
 			predicate.and(entity.id.eq(this.id));
