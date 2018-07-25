@@ -19,10 +19,12 @@ public class StudentUnitTest extends BaseUnitTest {
 
 	@Before
 	public void init() {
-		Student entity1 = Student.getBuilder().name("Mg Mg").build();
+		Student entity1 = new Student();
+		entity1.setName("Mg Mg");
 		repository.save(entity1);
 
-		Student entity2 = Student.getBuilder().name("Hla Hla").build();
+		Student entity2 = new Student();
+		entity2.setName("Hla Hla");
 		repository.save(entity2);
 
 	}

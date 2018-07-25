@@ -20,8 +20,10 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Data
+@ToString(exclude = { "DEFAULT_MAX_ROWS" })
 public abstract class AbstractCriteria {
 	@Getter(AccessLevel.NONE)
 	@Setter(AccessLevel.NONE)
@@ -75,7 +77,10 @@ public abstract class AbstractCriteria {
 		return predicate;
 	}
 
-	public Pageable getPager(int offset, int limit) {
+	public Pageable getPager(Integer offset, Integer limit) {
+		if (offset == null || limit == null) {
+			return null;
+		}
 		int page = offset > 0 ? offset / limit : 0;
 		limit = limit > 0 ? limit : DEFAULT_MAX_ROWS;
 

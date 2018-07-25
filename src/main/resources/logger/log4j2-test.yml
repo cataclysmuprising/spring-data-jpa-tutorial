@@ -124,6 +124,6 @@ Configutation:
         level: TRACE
         ### Others ###
       - name : com.github.cataclysmuprising.springdatajpatutorial
-        level: TRACE         
+        level: TRACE        
       - name : com.zaxxer # change below to DEBUG if you want to see connection pool properties
         level: WARN

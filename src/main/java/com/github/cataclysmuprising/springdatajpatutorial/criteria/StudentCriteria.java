@@ -13,7 +13,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class StudentCriteria extends AbstractCriteria {
 
