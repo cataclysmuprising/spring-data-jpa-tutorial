@@ -1,9 +1,9 @@
 package com.github.cataclysmuprising.springdatajpatutorial.serviceTests;
 
+import com.github.cataclysmuprising.springdatajpatutorial.CommonTestBase;
 import com.github.cataclysmuprising.springdatajpatutorial.criteria.StudentCriteria;
 import com.github.cataclysmuprising.springdatajpatutorial.dto.StudentDTO;
 import com.github.cataclysmuprising.springdatajpatutorial.service.StudentService;
-import com.github.cataclysmuprising.springdatajpatutorial.unitTests.BaseUnitTest;
 import com.github.cataclysmuprising.springdatajpatutorial.util.common.ObjectMapperUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class StudentServiceTest extends BaseUnitTest {
-    private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentServiceTest.class.getName());
+public class StudentServiceTestBase extends CommonTestBase {
+    private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentServiceTestBase.class.getName());
 
     @Autowired
     private StudentService service;
