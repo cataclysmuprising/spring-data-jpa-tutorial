@@ -1,15 +1,13 @@
 package com.github.cataclysmuprising.springdatajpatutorial.unitTests;
 
-import java.util.List;
-
+import com.github.cataclysmuprising.springdatajpatutorial.criteria.StudentCriteria;
+import com.github.cataclysmuprising.springdatajpatutorial.domain.Student;
+import com.github.cataclysmuprising.springdatajpatutorial.repository.StudentRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.github.cataclysmuprising.springdatajpatutorial.domain.Student;
-import com.github.cataclysmuprising.springdatajpatutorial.repository.StudentRepository;
 
 public class StudentUnitTest extends BaseUnitTest {
 	private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentUnitTest.class.getName());
@@ -31,7 +29,8 @@ public class StudentUnitTest extends BaseUnitTest {
 
 	@Test
 	public void findAll() {
-		List<Student> results = repository.findAll();
-		testLogger.info("Total Records ==> " + results.size());
+        StudentCriteria criteria = new StudentCriteria();
+        Iterable<Student> results = repository.findAll(criteria.getFilter());
+        testLogger.info("Total Records ==> " + results);
 	}
 }
