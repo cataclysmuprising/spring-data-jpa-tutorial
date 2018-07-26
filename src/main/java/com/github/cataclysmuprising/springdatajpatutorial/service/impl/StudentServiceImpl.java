@@ -1,7 +1,7 @@
 package com.github.cataclysmuprising.springdatajpatutorial.service.impl;
 
 import com.github.cataclysmuprising.springdatajpatutorial.criteria.StudentCriteria;
-import com.github.cataclysmuprising.springdatajpatutorial.domain.Student;
+import com.github.cataclysmuprising.springdatajpatutorial.entity.Student;
 import com.github.cataclysmuprising.springdatajpatutorial.dto.StudentDTO;
 import com.github.cataclysmuprising.springdatajpatutorial.repository.StudentRepository;
 import com.github.cataclysmuprising.springdatajpatutorial.service.StudentService;

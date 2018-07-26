@@ -2,7 +2,7 @@ package com.github.cataclysmuprising.springdatajpatutorial.unitTests;
 
 import com.github.cataclysmuprising.springdatajpatutorial.CommonTestBase;
 import com.github.cataclysmuprising.springdatajpatutorial.criteria.StudentCriteria;
-import com.github.cataclysmuprising.springdatajpatutorial.domain.Student;
+import com.github.cataclysmuprising.springdatajpatutorial.entity.Student;
 import com.github.cataclysmuprising.springdatajpatutorial.repository.StudentRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

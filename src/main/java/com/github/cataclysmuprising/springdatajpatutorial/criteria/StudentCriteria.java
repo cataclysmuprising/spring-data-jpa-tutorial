@@ -2,7 +2,7 @@ package com.github.cataclysmuprising.springdatajpatutorial.criteria;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.github.cataclysmuprising.springdatajpatutorial.domain.QStudent;
+import com.github.cataclysmuprising.springdatajpatutorial.entity.QStudent;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 

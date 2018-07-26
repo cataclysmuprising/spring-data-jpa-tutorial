@@ -1,4 +1,4 @@
-package com.github.cataclysmuprising.springdatajpatutorial.domain;
+package com.github.cataclysmuprising.springdatajpatutorial.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

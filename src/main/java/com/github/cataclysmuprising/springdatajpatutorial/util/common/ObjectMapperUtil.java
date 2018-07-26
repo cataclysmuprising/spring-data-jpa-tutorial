@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.github.cataclysmuprising.springdatajpatutorial.domain.AbstractEntity;
+import com.github.cataclysmuprising.springdatajpatutorial.entity.AbstractEntity;
 import com.github.cataclysmuprising.springdatajpatutorial.dto.AbstractDTO;
 import com.github.cataclysmuprising.springdatajpatutorial.dto.StudentDTO;
 import com.github.cataclysmuprising.springdatajpatutorial.exception.ValidationFailedException;

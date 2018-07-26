@@ -49,7 +49,7 @@ public class PrimaryPersistenceContext {
     @Primary
     @Bean(name = ENTITY_MANAGER_FACTORY)
     public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier(DATASOURCE) DataSource primaryDataSource) {
-        return builder.dataSource(primaryDataSource).packages("com.github.cataclysmuprising.springdatajpatutorial.domain").persistenceUnit("primaryPSTUnit").build();
+        return builder.dataSource(primaryDataSource).packages("com.github.cataclysmuprising.springdatajpatutorial.entity").persistenceUnit("primaryPSTUnit").build();
     }
 
     @Primary

@@ -1,4 +1,4 @@
-package com.github.cataclysmuprising.springdatajpatutorial.domain;
+package com.github.cataclysmuprising.springdatajpatutorial.entity;
 
 import lombok.Getter;
 import lombok.Setter;

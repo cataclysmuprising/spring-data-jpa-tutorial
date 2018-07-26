@@ -1,6 +1,6 @@
 package com.github.cataclysmuprising.springdatajpatutorial.criteria;
 
-import com.github.cataclysmuprising.springdatajpatutorial.domain.QAbstractEntity;
+import com.github.cataclysmuprising.springdatajpatutorial.entity.QAbstractEntity;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import lombok.*;
