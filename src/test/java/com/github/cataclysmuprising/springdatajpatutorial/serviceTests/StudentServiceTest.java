@@ -66,4 +66,16 @@ public class StudentServiceTest extends CommonTestBase {
         testLogger.info("Result Entries by fetching with Criteria: {}", criteria);
         ObjectMapperUtil.showEntriesOfCollection(results);
     }
+
+    @Test
+    public void updateById() {
+        StudentDTO updateDTO = new StudentDTO();
+        updateDTO.setId(1L);
+        updateDTO.setName("Kyaw Kyaw");
+
+        service.update(updateDTO);
+
+        StudentDTO updatedDTO = service.findById(1L);
+        testLogger.info("Updated Entry Informations ==> {} ", updatedDTO);
+    }
 }
