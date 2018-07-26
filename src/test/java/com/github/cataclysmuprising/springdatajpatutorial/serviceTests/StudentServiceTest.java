@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class StudentServiceTestBase extends CommonTestBase {
-    private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentServiceTestBase.class.getName());
+public class StudentServiceTest extends CommonTestBase {
+    private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentServiceTest.class.getName());
 
     @Autowired
     private StudentService service;

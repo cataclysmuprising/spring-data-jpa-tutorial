@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class StudentUnitTestBase extends CommonTestBase {
-    private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentUnitTestBase.class.getName());
+public class StudentUnitTest extends CommonTestBase {
+    private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentUnitTest.class.getName());
 
     @Autowired
     private StudentRepository repository;
