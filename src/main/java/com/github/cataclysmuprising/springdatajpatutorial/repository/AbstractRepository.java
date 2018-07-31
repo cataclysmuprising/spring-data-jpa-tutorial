@@ -1,39 +1,39 @@
 package com.github.cataclysmuprising.springdatajpatutorial.repository;
 
-import com.querydsl.core.types.Predicate;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.Repository;
-
 import java.util.List;
 import java.util.Optional;
 
-@NoRepositoryBean
-public interface AbstractRepository<T, ID> extends Repository<T, ID> {
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-    Optional<T> findById(ID id);
+import com.querydsl.core.types.Predicate;
 
-    Optional<T> findOne(Predicate predicate);
+//@NoRepositoryBean
+//public interface AbstractRepository<T, ID> extends Repository<T, ID> {
+public interface AbstractRepository<T, ID> {
 
-    Iterable<T> findAll(Predicate predicate);
+	Optional<T> findById(ID id);
 
-    Page<T> findAll(Predicate predicate, Pageable pageable);
+	Optional<T> findOne(Predicate predicate);
 
-    <S extends T> S save(S entity);
+	Iterable<T> findAll(Predicate predicate);
 
-    <S extends T> S saveAndFlush(S entity);
+	Page<T> findAll(Predicate predicate, Pageable pageable);
 
-    <S extends T> List<S> saveAll(Iterable<S> entities);
+	<S extends T> S save(S entity);
 
-    long count(Predicate predicate);
+	<S extends T> S saveAndFlush(S entity);
 
-    void delete(T entity);
+	<S extends T> List<S> saveAll(Iterable<S> entities);
 
-    void deleteById(ID id);
+	long count(Predicate predicate);
 
-    void deleteAll(Iterable<? extends T> entities);
+	void delete(T entity);
 
-    void flush();
+	void deleteById(ID id);
+
+	void deleteAll(Iterable<? extends T> entities);
+
+	void flush();
 
 }
