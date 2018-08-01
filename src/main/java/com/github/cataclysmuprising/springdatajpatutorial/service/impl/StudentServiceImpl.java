@@ -1,6 +1,7 @@
 package com.github.cataclysmuprising.springdatajpatutorial.service.impl;
 
 import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -17,6 +18,7 @@ import com.github.cataclysmuprising.springdatajpatutorial.entity.Student;
 import com.github.cataclysmuprising.springdatajpatutorial.repository.StudentRepository;
 import com.github.cataclysmuprising.springdatajpatutorial.service.StudentService;
 import com.github.cataclysmuprising.springdatajpatutorial.util.common.ObjectMapperUtil;
+import com.github.cataclysmuprising.springdatajpatutorial.util.common.UpdateItem;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -106,6 +108,13 @@ public class StudentServiceImpl implements StudentService {
 
 		serviceLogger.info("Updated the information of the student entry: {}", oldEntry);
 		return ObjectMapperUtil.mapEntityIntoDTO(oldEntry, StudentDTO.class);
+	}
+
+	@Transactional
+	@Override
+	public long update(Set<UpdateItem> updateItems, StudentCriteria criteria) {
+		serviceLogger.info("Updating by criteria");
+		return repository.update(updateItems, criteria);
 	}
 
 	@Transactional

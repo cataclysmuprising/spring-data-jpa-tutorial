@@ -2,10 +2,13 @@ package com.github.cataclysmuprising.springdatajpatutorial.repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.github.cataclysmuprising.springdatajpatutorial.criteria.StudentCriteria;
+import com.github.cataclysmuprising.springdatajpatutorial.util.common.UpdateItem;
 import com.querydsl.core.types.Predicate;
 
 //@NoRepositoryBean
@@ -27,6 +30,8 @@ public interface AbstractRepository<T, ID> {
 	<S extends T> List<S> saveAll(Iterable<S> entities);
 
 	long count(Predicate predicate);
+
+	long update(Set<UpdateItem> updateItems, StudentCriteria criteria);
 
 	void delete(T entity);
 
