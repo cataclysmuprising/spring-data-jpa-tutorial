@@ -11,11 +11,10 @@ import java.io.Serializable;
 
 public abstract class AbstractRepositoryImpl<T, ID extends Serializable> extends QuerydslJpaRepository<T, ID> implements AbstractRepository<T, ID> {
 
-    @Resource(name = "auditorProvider")
-    protected AuditorAware<Long> auditorProvider;
+	@Resource(name = "auditorProvider")
+	protected AuditorAware<Long> auditorProvider;
 
-    public AbstractRepositoryImpl(JpaEntityInformation<T, ID> entityInformation, EntityManager entityManager) {
-        super(entityInformation, entityManager);
-    }
-
+	public AbstractRepositoryImpl(JpaEntityInformation<T, ID> entityInformation, EntityManager entityManager) {
+		super(entityInformation, entityManager);
+	}
 }

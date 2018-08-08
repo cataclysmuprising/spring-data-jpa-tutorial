@@ -11,31 +11,30 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class StudentUnitTest extends CommonTestBase {
-    private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentUnitTest.class.getName());
+	private static final Logger testLogger = LogManager.getLogger("testLogs." + StudentUnitTest.class.getName());
 
-    @Autowired
-    private StudentRepository repository;
+	@Autowired
+	private StudentRepository repository;
 
-    @Before
-    public void init() {
-        Student entity1 = new Student();
-        entity1.setName("Mg Mg");
-        repository.save(entity1);
-        Student entity2 = new Student();
-        entity2.setName("Hla Hla");
-        repository.save(entity2);
+	@Before
+	public void init() {
+		Student entity1 = new Student();
+		entity1.setName("Mg Mg");
+		repository.save(entity1);
+		Student entity2 = new Student();
+		entity2.setName("Hla Hla");
+		repository.save(entity2);
+	}
 
-    }
+	@Test
+	public void findAll() {
+		StudentCriteria criteria = new StudentCriteria();
+		Iterable<Student> results = repository.findAll(criteria.getFilter());
+		results.forEach(result -> testLogger.info("Results ==> " + result));
+	}
 
-    @Test
-    public void findAll() {
-        StudentCriteria criteria = new StudentCriteria();
-        Iterable<Student> results = repository.findAll(criteria.getFilter());
-        testLogger.info("Total Records ==> " + results);
-    }
-
-    @Test
-    public void findByName() {
-        repository.fetchStudentByName("Mg Mg");
-    }
+	@Test
+	public void findByName() {
+		repository.fetchStudentByName("Mg Mg");
+	}
 }

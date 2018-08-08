@@ -6,19 +6,18 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "mjr_student")
+@Table(name = "mjr_passport")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class Student extends AbstractEntity {
-	@NotBlank
-	@Column(nullable = false)
-	private String name;
+public class Passport extends AbstractEntity {
 
-	@OneToOne(fetch = FetchType.LAZY)
-	private Passport passport;
+	@Column(nullable = false)
+	private String number;
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+	private Student student;
 }

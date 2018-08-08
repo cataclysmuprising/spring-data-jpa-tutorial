@@ -7,7 +7,7 @@ spring:
         show_sql: false # enable with logger
         format_sql: true # 'true' for dev purpose
         hbm2ddl:
-          auto: create-drop
+          auto: update
         ejb:
           naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
         temp:
